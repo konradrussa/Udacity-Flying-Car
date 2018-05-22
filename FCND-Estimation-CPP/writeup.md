@@ -3,10 +3,10 @@
 I needed to fix lateral position and and re-tune PID controller to obtain +- velocities and accelerations using CONSTRAIN, 
 previously using fmod and constant flow or not was not enough :), actually that was a bug, and not allow to successfully run simulator with estimation and stop drone on time.
 
-Criteria:
+### Criteria:
 
 ----------------------------------------------------------------------------------------
-Determine the standard deviation of the measurement noise of both GPS X data and Accelerometer X data:
+### Determine the standard deviation of the measurement noise of both GPS X data and Accelerometer X data:
 
 i have built this script:
 ```
@@ -45,14 +45,14 @@ print("IMU_STD2: ",np.sqrt(imu_std/len(data_imu)))
 #IMU_STD:   0.488252565593
 #IMU_STD2:  0.488252565593
 ```
-*
+
 where 
 GPS_STD:   0.7091878283
 IMU_STD:   0.488252565593
-*
+
 ----------------------------------------------------------------------------------------
 
-Implement a better rate gyro attitude integration scheme in the UpdateFromIMU() function.
+### Implement a better rate gyro attitude integration scheme in the UpdateFromIMU() function.
 
 Implementation:
 ```
@@ -88,7 +88,7 @@ Implementation:
   ```
 ----------------------------------------------------------------------------------------
 
-Implement all of the elements of the prediction step for the estimator.
+### Implement all of the elements of the prediction step for the estimator.
 
 PredictState:
 ```
@@ -148,7 +148,7 @@ Predict:
 ```
 ----------------------------------------------------------------------------------------
 
-Implement the magnetometer update.
+### Implement the magnetometer update.
 ```
   float yaw_angle_diff = z(0) - ekfState(6);
 
@@ -165,7 +165,7 @@ Implement the magnetometer update.
   ```
 ----------------------------------------------------------------------------------------
 
-Implement the GPS update.
+### Implement the GPS update.
 ```
   // hPrime - Jacobian, partial derivative for position and velocity, yaw not accounted:
   //	   [[1, 0, 0, 0, 0, 0, 0]

@@ -3,9 +3,8 @@
 I needed to fix lateral position and and re-tune PID controller to obtain +- velocities and accelerations using CONSTRAIN, 
 previously using fmod and constant flow or not was not enough :), actually that was a bug, and not allow to successfully run simulator with estimation and stop drone on time.
 
-### Criteria:
+# Criteria:
 
-----------------------------------------------------------------------------------------
 Determine the standard deviation of the measurement noise of both GPS X data and Accelerometer X data:
 
 i have built this script:

@@ -90,8 +90,8 @@ Implementation:
 
 Implement all of the elements of the prediction step for the estimator.
 
-PredictState:
 ```
+PredictState:
   //valocity integration to update position
   predictedState(0) += ekfState(3) * dt;
   predictedState(1) += ekfState(4) * dt;

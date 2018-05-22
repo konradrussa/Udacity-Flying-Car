@@ -168,11 +168,11 @@ Implement the GPS update.
 ```
   // hPrime - Jacobian, partial derivative for position and velocity, yaw not accounted:
   //	   [[1, 0, 0, 0, 0, 0, 0]
-  //		[0, 1, 0, 0, 0, 0, 0]
-  //		[0, 0, 1, 0, 0, 0, 0]
-  //		[0, 0, 0, 1, 0, 0, 0]
-  //		[0, 0, 0, 0, 1, 0, 0]
-  //		[0, 0, 0, 0, 0, 1, 0]]
+  //	    [0, 1, 0, 0, 0, 0, 0]
+  //	    [0, 0, 1, 0, 0, 0, 0]
+  //	    [0, 0, 0, 1, 0, 0, 0]
+  //	    [0, 0, 0, 0, 1, 0, 0]
+  //	    [0, 0, 0, 0, 0, 1, 0]]
 
   for (int i = 0; i < 6; i++) {
 	  zFromX(i) = ekfState(i); // updates for positions and velocities estimations

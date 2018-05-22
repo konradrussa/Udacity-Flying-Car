@@ -100,7 +100,7 @@ PredictState:
   attitude.IntegrateBodyRate(gyro, dtIMU); //integrate body rates
 
   V3F global_acceleration = attitude.Rotate_BtoI(accel); // IMU gives body frame, required transformation to Inertial frame
-  global_acceleration.z -= 9.81f;						 // IMU does not include gravity, including gravity component
+  global_acceleration.z -= 9.81f;			 // IMU does not include gravity, including gravity component
 
   //acceleration integration to update velocity
   predictedState(3) += global_acceleration.x * dt;

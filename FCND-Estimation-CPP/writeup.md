@@ -45,10 +45,11 @@ print("IMU_STD2: ",np.sqrt(imu_std/len(data_imu)))
 #IMU_STD:   0.488252565593
 #IMU_STD2:  0.488252565593
 ```
+*
 where 
 GPS_STD:   0.7091878283
 IMU_STD:   0.488252565593
-
+*
 ----------------------------------------------------------------------------------------
 
 Implement a better rate gyro attitude integration scheme in the UpdateFromIMU() function.

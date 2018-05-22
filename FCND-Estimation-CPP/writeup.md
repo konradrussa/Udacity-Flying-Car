@@ -9,7 +9,7 @@ Criteria:
 Determine the standard deviation of the measurement noise of both GPS X data and Accelerometer X data:
 
 i have built this script:
-
+```
 import numpy as np
 
 data_gps = np.loadtxt('Graph1.txt', delimiter=',', dtype='Float64', skiprows=1)
@@ -44,7 +44,7 @@ print("IMU_STD2: ",np.sqrt(imu_std/len(data_imu)))
 #IMU_MEAN2: -0.0155729778114
 #IMU_STD:   0.488252565593
 #IMU_STD2:  0.488252565593
-
+```
 where 
 GPS_STD:   0.7091878283
 IMU_STD:   0.488252565593
@@ -54,6 +54,7 @@ IMU_STD:   0.488252565593
 Implement a better rate gyro attitude integration scheme in the UpdateFromIMU() function.
 
 Implementation:
+```
   /*
   // Attitude Update
   //USING Rotation Matrix and Euler Forward method to get Euler angles at time t
@@ -83,11 +84,13 @@ Implementation:
   // normalize yaw to -pi .. pi
   if (ekfState(6) > F_PI) ekfState(6) -= 2.f*F_PI;
   if (ekfState(6) < -F_PI) ekfState(6) += 2.f*F_PI;
+  ```
 ----------------------------------------------------------------------------------------
 
 Implement all of the elements of the prediction step for the estimator.
 
 PredictState:
+```
   //valocity integration to update position
   predictedState(0) += ekfState(3) * dt;
   predictedState(1) += ekfState(4) * dt;
@@ -102,7 +105,7 @@ PredictState:
   predictedState(3) += global_acceleration.x * dt;
   predictedState(4) += global_acceleration.y * dt;
   predictedState(5) += global_acceleration.z * dt;
-  
+ 
 GetRbgPrime:
   /*
   R'bg =
@@ -141,11 +144,11 @@ Predict:
   gPrime(5, 6) = j3.mag();
   
   ekfCov = gPrime * ekfCov * gPrime.transpose() + Q;  
-
+```
 ----------------------------------------------------------------------------------------
 
 Implement the magnetometer update.
-
+```
   float yaw_angle_diff = z(0) - ekfState(6);
 
   // normalize yaw to -pi .. pi
@@ -158,11 +161,11 @@ Implement the magnetometer update.
   //		[0, 0, 0, 0, 0, 0, 1]
 
   hPrime(0, 6) = 1;
-  
+  ```
 ----------------------------------------------------------------------------------------
 
 Implement the GPS update.
-
+```
   // hPrime - Jacobian, partial derivative for position and velocity, yaw not accounted:
   //	   [[1, 0, 0, 0, 0, 0, 0]
   //		[0, 1, 0, 0, 0, 0, 0]
@@ -175,3 +178,4 @@ Implement the GPS update.
 	  zFromX(i) = ekfState(i); // updates for positions and velocities estimations
 	  hPrime(i, i) = 1;
   }
+```

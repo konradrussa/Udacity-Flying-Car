@@ -79,13 +79,26 @@ VehicleCommand QuadControl::GenerateMotorCommands(float collThrustCmd, V3F momen
 
   float l = L / sqrt(2.0f); // perpendicular distance to axes
 
-  //collThrustCmd = f1 + f2 + f3 + f4;
-  //momentCmd.y = l * (f1 + f2 - f3 - f4);
-  //momentCmd.z = kappa * f1 - kappa * f2 + kappa * f3 - kappa * f4;
+  /*
+  build based on below equations for 4 motors, 2 CW and 2 CCW:
+
+  collThrustCmd = f1 + f2 + f3 + f4;
+  momentCmd.x = l * (f1 + f4 - f2 - f3);
+  momentCmd.y = l * (f1 + f2 - f3 - f4);
+  momentCmd.z = kappa * f1 - kappa * f2 + kappa * f3 - kappa * f4;
+  
+  where such configuration is true for above equations:
+  
+        X
+  f1 CW | f2CCW
+  ------Z------Y
+  f4CCW | f3 CW
+
+  */
 
   float f1 = (kappa * (collThrustCmd * l + momentCmd.x + momentCmd.y) + l * momentCmd.z) / (4.0f * l * kappa);
   float f2 = ((l * collThrustCmd - momentCmd.x + momentCmd.y) / l - momentCmd.z / kappa) / 4.0f;
-  float f3 = (l * kappa * collThrustCmd + l * momentCmd.z - kappa * momentCmd.x - kappa * momentCmd.y) / (4.0f * l * kappa);
+  float f3 = (kappa * (collThrustCmd * l - momentCmd.x - momentCmd.y) + l * momentCmd.z) / (4.0f * l * kappa);
   float f4 = ((l * collThrustCmd + momentCmd.x - momentCmd.y) / l - momentCmd.z / kappa) / 4.0f;
 
   //cmd.desiredThrustsN[0] = mass * 9.81f / 4.f; // front left
